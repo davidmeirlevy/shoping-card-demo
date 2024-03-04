@@ -1,3 +1,4 @@
+import path from 'node:path'
 import express from 'express'
 import cors from 'cors'
 import morgan from 'morgan'
@@ -7,6 +8,8 @@ import { connectToDb } from './models/db'
 
 const app = express()
 
+
+
 app.use(express.json())
 app.use(cookieParser())
 app.use(cors())
@@ -14,7 +17,10 @@ app.use(morgan('tiny'))
 
 app.use(router)
 
-const port = process.env.PORT || 3000;
+app.use(express.static(path.join(__dirname, 'public')))
+app.use('*', express.static(path.join(__dirname, 'public/index.html')))
+
+const port = process.env.PORT || 4200;
 
 connectToDb().catch(() => process.exit(1))
 app.listen(port, () => {

@@ -20,6 +20,9 @@ function getCartData(req) {
 export function getCart(req, res) {
     try {
         const cartData = JSON.parse(req.cookies.cart);
+        if (typeof cartData.products !== 'object') {
+            throw new Error('yo')
+        }
         res.send(cartData)
     } catch {
         res.send({
