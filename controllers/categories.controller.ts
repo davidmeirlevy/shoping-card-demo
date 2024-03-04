@@ -5,7 +5,7 @@ export async function getAllCategories(req, res) {
     const q: string = (req.query.q || '') || ''
 
     const query: any = {}
-    if (q && typeof q === 'string' && q.length > 2) {
+    if (q && q.length > 2) {
         query.name = new RegExp(q, 'i');  // /NIK/i
     }
 
